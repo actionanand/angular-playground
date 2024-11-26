@@ -8,7 +8,7 @@ tasks:
   - name: Angular 18
     before: nvm install v20.13.1
     init: yarn install && yarn run build
-    command: yarn run start
+    command: yarn run develop
 vscode:
   extensions:
     - angular.ng-template
