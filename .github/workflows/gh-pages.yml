@@ -3,7 +3,7 @@ name: GitHub Pages - Angular 18
 on:
   push:
     branches:
-    - master
+      - master
 
 permissions:
   contents: write
@@ -12,29 +12,29 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20.13.1'
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.13.1'
 
-    - name: Install dependencies
-      run: yarn install
+      - name: Install dependencies
+        run: yarn install
 
-    - name: Build for gh-page
-      run: yarn run build:gh
+      - name: Build for gh-page
+        run: yarn run build:gh
 
-    - name: Copy error files to redirect to home
-      run: yarn run copy-error-page
+      - name: Copy error files to redirect to home
+        run: yarn run copy-error-page
 
-    - name: Deploy
-      if: success()
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        base_href: /angular-form/   # make sure this corresponds to https://<your_username>.github.io/<base_href>/
-        deploy_branch: gh-pages 
-        publish_dir: dist/angular-form/browser
-        enable_jekyll: true
+      - name: Deploy
+        if: success()
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          base_href: /angular-playground/ # make sure this corresponds to https://<your_username>.github.io/<base_href>/
+          deploy_branch: gh-pages
+          publish_dir: dist/angular-playground/browser
+          enable_jekyll: true

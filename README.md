@@ -1,4 +1,4 @@
-# Angular Forms- Deep Dive
+# Angular Playground
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.3.
 
@@ -31,11 +31,11 @@ npx degit github:user/repo#branch-name <folder-name>
 4. Cloning this project with skeleton
 
 ```bash
-git clone https://github.com/actionanand/angular-form.git --branch 1-skeleton angular-proj-name
+git clone https://github.com/actionanand/angular-playground.git --branch 1-skeleton angular-proj-name
 ```
 
 ```bash
-npx degit github:actionanand/angular-form#1-skeleton angular-proj-name
+npx degit github:actionanand/angular-playground#1-skeleton angular-proj-name
 ```
 
 ## Automate using `Prettier`, `Es Lint` and `Husky`
