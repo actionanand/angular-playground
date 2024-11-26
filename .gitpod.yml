@@ -5,8 +5,8 @@
 # Learn more from ready-to-use templates: https://www.gitpod.io/docs/introduction/getting-started/quickstart
 
 tasks:
-  - name: Angular 18
-    before: nvm install v20.13.1
+  - name: Angular 19
+    before: nvm install v22.11.0
     init: yarn install && yarn run build
     command: yarn run develop
 vscode:

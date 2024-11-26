@@ -1,6 +1,6 @@
 # Angular Playground
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.3.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 19.0.2.
 
 ## Cloning Guide
 
@@ -43,7 +43,7 @@ npx degit github:actionanand/angular-playground#1-skeleton angular-proj-name
 1. Install the compatible node version
 
 ```bash
-  nvm install v20.13.1
+  nvm install v22.11.0
 ```
 
 2. Install and Configure Prettier
@@ -54,7 +54,7 @@ npx degit github:actionanand/angular-playground#1-skeleton angular-proj-name
      yarn add prettier -D
    ```
 
-   - Create a `.prettierrc` file and write down the format as below: - [online ref](https://prettier.io/docs/en/options.html)
+   - Create a `.prettierrc.yml` file and write down the format as below: - [online ref](https://prettier.io/docs/en/options.html)
 
    ```yml
    trailingComma: 'all'
@@ -110,6 +110,8 @@ ng add @angular-eslint/schematics
 if error comes, use the below command
 
 ```shell
+ng add @angular-eslint/schematics@19.0.0-alpha.4
+# or
 ng add @angular-eslint/schematics@next
 ```
 
@@ -136,16 +138,14 @@ To configure the pre-commit hook, simply add a `precommit` npm script. We want t
    - Run it once
 
    ```bash
-     npm pkg set scripts.prepare="husky install"
-     npm run prepare
+     npx husky init
    ```
 
    - Add a hook
 
    ```bash
-     npx husky add .husky/pre-commit "yarn run precommit"
-     npx husky add .husky/pre-commit "yarn test"
-     git add .husky/pre-commit
+     echo "yarn run precommit" > .husky/pre-commit
+     echo "yarn run test" > .husky/pre-commit
    ```
 
    - Make a commit
@@ -224,3 +224,9 @@ To configure the pre-commit hook, simply add a `precommit` npm script. We want t
 
 - [GitHub Actions for Angular](https://github.com/rodrigokamada/angular-github-actions)
 - [Angular 16 - milestone release](https://github.com/actionanand/ng16-signal-milestone-release)
+- [Meet Angular v19 - Official](https://blog.angular.dev/meet-angular-v19-7b29dfd05b84)
+- [Angular 19 – what’s new?](https://angular.love/angular-19-whats-new)
+- [Angular Version 19: New Features and Updates](https://dev.to/this-is-angular/angular-version-19-new-features-and-updates-3nk7)
+- [Angular 19 - 5 Game-Changing Features You Need to Know](https://dev.to/this-is-angular/angular-19-5-game-changing-features-you-need-to-know-32cd)
+- [Changing the visibility of your GitHub Pages site](https://docs.github.com/en/enterprise-cloud@latest/pages/getting-started-with-github-pages/changing-the-visibility-of-your-github-pages-site)
+- [The `package.json` guide](https://flaviocopes.com/package-json/#author)

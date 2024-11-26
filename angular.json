@@ -42,8 +42,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kB",
-                  "maximumError": "4kB"
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
                 }
               ],
               "outputHashing": "all"
@@ -97,7 +97,6 @@
     }
   },
   "cli": {
-    "analytics": false,
     "schematicCollections": ["@angular-eslint/schematics"]
   }
 }
