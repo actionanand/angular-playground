@@ -222,11 +222,17 @@ To configure the pre-commit hook, simply add a `precommit` npm script. We want t
 
 ## Resources
 
+1. [Mat Checkbox Column - Stackblitz (Angular 10)](https://stackblitz.com/edit/angular-mattable-checkbox-column)
+2. [Mat Checkbox Column with pagination - Stackblitz (Angular 7)](https://stackblitz.com/edit/angular-mat-table-checkbox-select-all-ivt1dw)
+
+## Wiki
+
 - [GitHub Actions for Angular](https://github.com/rodrigokamada/angular-github-actions)
 - [Angular 16 - milestone release](https://github.com/actionanand/ng16-signal-milestone-release)
 - [Meet Angular v19 - Official](https://blog.angular.dev/meet-angular-v19-7b29dfd05b84)
 - [Angular 19 – what’s new?](https://angular.love/angular-19-whats-new)
 - [Angular Version 19: New Features and Updates](https://dev.to/this-is-angular/angular-version-19-new-features-and-updates-3nk7)
 - [Angular 19 - 5 Game-Changing Features You Need to Know](https://dev.to/this-is-angular/angular-19-5-game-changing-features-you-need-to-know-32cd)
+- [Hello, Angular 19](https://medium.com/@sehban.alam/hello-angular-19-77fb1691bbb5)
 - [Changing the visibility of your GitHub Pages site](https://docs.github.com/en/enterprise-cloud@latest/pages/getting-started-with-github-pages/changing-the-visibility-of-your-github-pages-site)
 - [The `package.json` guide](https://flaviocopes.com/package-json/#author)
