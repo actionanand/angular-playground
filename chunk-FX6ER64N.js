@@ -1,0 +1,1 @@
+import{Pa as o,eb as n,fb as p,rb as a}from"./chunk-46S3Z2KE.js";var l=class t{static \u0275fac=function(e){return new(e||t)};static \u0275cmp=o({type:t,selectors:[["app-split-row-table"]],decls:2,vars:0,template:function(e,s){e&1&&(n(0,"p"),a(1,"split-row-table works!"),p())},encapsulation:2})};export{l as SplitRowTableComponent};
