@@ -1,0 +1,10 @@
+<mat-toolbar class="header-wrap">
+  <span>Playground</span>
+  <button mat-button [matMenuTriggerFor]="menu">Menu</button>
+</mat-toolbar>
+
+<mat-menu #menu="matMenu">
+  @for (path of urls; track path.name) {
+    <button mat-menu-item [routerLink]="path.url">{{ path.name }}</button>
+  }
+</mat-menu>
