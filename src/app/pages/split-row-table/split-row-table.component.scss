@@ -1,0 +1,35 @@
+.split-table {
+  &-number {
+    padding-left: 16px;
+  }
+
+  &-no {
+    .split-table-checkbox {
+      display: none;
+    }
+
+    .split-table-number {
+      display: block;
+    }
+  }
+
+  &-check {
+    .split-table-checkbox {
+      display: block;
+    }
+
+    .split-table-number {
+      display: none;
+    }
+  }
+
+  &:hover {
+    .split-table-checkbox {
+      display: block;
+    }
+
+    .split-table-number {
+      display: none;
+    }
+  }
+}

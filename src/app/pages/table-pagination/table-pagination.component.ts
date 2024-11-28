@@ -64,4 +64,14 @@ export class TablePaginationComponent {
   logSelection() {
     this.selection.selected.forEach(s => console.log(s.name));
   }
+
+  // To add row position, if not came from the API data
+  rowPosition(index: number): number {
+    /*
+    <td mat-cell *matCellDef="let element; let i = index;">{{ rowPosition(i) }}</td>
+    - Using *matCellDef="let element = index" if the table has one-row template
+    - Using *matCellDef="let element = dataIndex" if the table has multiple row templates
+    */
+    return (this.paginator()?.pageIndex ?? 0) * (this.paginator()?.pageSize ?? 0) + index + 1;
+  }
 }
