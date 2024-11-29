@@ -10,7 +10,7 @@ import { ELEMENT_DATA } from '../../shared/data/table.data';
 import { PeriodicElement } from '../../models/periodic-element.model';
 
 enum COLUMN_NAMES {
-  position = 'No.',
+  position = '#',
   name = 'Name',
   weight = 'Weight',
   symbol = 'Symbol',
