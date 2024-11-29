@@ -5,14 +5,8 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatCheckbox } from '@angular/material/checkbox';
 
 import { ELEMENT_DATA } from '../../shared/data/table.data';
-import { PeriodicElement } from '../../models/periodic-element.model';
-
-enum COLUMN_NAMES {
-  position = 'No.',
-  name = 'Name',
-  weight = 'Weight',
-  symbol = 'Symbol',
-}
+import { PeriodicElement, TableHeader } from '../../models/periodic-element.model';
+import { TableProperties } from '../../services/table/table.static';
 
 @Component({
   selector: 'app-table-check',
@@ -21,8 +15,9 @@ enum COLUMN_NAMES {
   styleUrl: './table-check.component.scss',
 })
 export class TableCheckComponent {
-  displayedColumns: string[] = ['select', 'position', 'name', 'weight', 'symbol'];
-  columnNames: { [key: string]: string } = COLUMN_NAMES;
+  // using legacy static methods to get share global static data
+  displayedColumns: string[] = TableProperties.getDisplayedColumns(); // ['select', 'position', 'name', 'weight', 'symbol'];
+  headers: TableHeader[] = TableProperties.getHeaders(); // [{ key: 'position', value: 'No.' }, { key: 'name', value: 'Name' }];
 
   readonly ElementData: PeriodicElement[] = ELEMENT_DATA.slice(0, 10);
 
