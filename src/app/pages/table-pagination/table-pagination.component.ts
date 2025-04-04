@@ -7,7 +7,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { MatCheckbox } from '@angular/material/checkbox';
 
 import { ELEMENT_DATA } from '../../shared/data/table.data';
-import { PeriodicElement } from '../../models/periodic-element.model';
+import { PeriodicElement } from '../../models';
 
 enum COLUMN_NAMES {
   position = '#',

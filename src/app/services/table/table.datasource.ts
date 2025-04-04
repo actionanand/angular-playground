@@ -3,7 +3,7 @@ import { inject } from '@angular/core';
 
 import { BehaviorSubject, catchError, finalize, map, Observable, of } from 'rxjs';
 
-import { PeriodicElement, TableResponseModel } from '../../models/periodic-element.model';
+import { PeriodicElement, TableResponseModel } from '../../models';
 import { TableService } from './table.service';
 
 export class TableDataSource implements DataSource<PeriodicElement> {

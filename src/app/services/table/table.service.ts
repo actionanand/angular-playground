@@ -4,7 +4,7 @@ import { inject, Injectable } from '@angular/core';
 import { map, Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs';
 
-import { TableResponseModel } from '../../models/periodic-element.model';
+import { TableResponseModel } from '../../models';
 
 @Injectable({
   providedIn: 'root',

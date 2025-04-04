@@ -5,7 +5,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatCheckbox } from '@angular/material/checkbox';
 
 import { ELEMENT_DATA } from '../../shared/data/table.data';
-import { PeriodicElement, TableHeader } from '../../models/periodic-element.model';
+import { PeriodicElement, TableHeader } from '../../models';
 import { TableProperties } from '../../services/table/table.static';
 
 @Component({

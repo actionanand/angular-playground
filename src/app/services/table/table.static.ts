@@ -1,4 +1,4 @@
-import { TableHeader } from '../../models/periodic-element.model';
+import { TableHeader } from '../../models';
 
 export class TableProperties {
   private static headers: TableHeader[]; // = [{ key: 'position', value: 'No.' }, { key: 'name', value: 'Name' }];
