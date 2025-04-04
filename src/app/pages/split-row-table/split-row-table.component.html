@@ -1,39 +1,65 @@
 <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
-  <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
+  <!-- first row columns -->
+  @for (column of displayedColumns; track $index) {
+    @if (column === 'position') {
+      <!-- position column -->
+      <ng-container [matColumnDef]="column">
+        <!-- position header is always checkbox -->
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox
+            (change)="$event && !selection.selected.length ? masterToggle() : selection.clear() && null"
+            [checked]="selection.hasValue() || isAllSelected()"
+            [indeterminate]="selection.hasValue() && !isAllSelected()">
+          </mat-checkbox>
+        </th>
 
-  <!-- Position Column -->
-  <ng-container matColumnDef="position">
-    <th mat-header-cell *matHeaderCellDef>No.</th>
-    <td mat-cell *matCellDef="let element">{{ element.position }}</td>
-  </ng-container>
+        <!-- position column is checkbox if 'split-table-check' is set -->
+        <td mat-cell *matCellDef="let row">
+          <div class="split-table" [ngClass]="selection.isSelected(row) ? 'split-table-check' : 'split-table-no'">
+            <mat-checkbox
+              class="split-table-checkbox"
+              (click)="$event.stopPropagation()"
+              (change)="$event ? selection.toggle(row) : null"
+              [checked]="selection.isSelected(row)">
+            </mat-checkbox>
 
-  <!-- Name Column -->
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef>Name</th>
-    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-  </ng-container>
+            <span class="split-table-number"> {{ row[column] }} </span>
+          </div>
+        </td>
+      </ng-container>
+    } @else {
+      <!-- All coulumns except positions -->
+      <ng-container [matColumnDef]="column">
+        <th mat-header-cell *matHeaderCellDef>{{ columnNames[column] }}</th>
+        <td mat-cell *matCellDef="let element">{{ element[column] }}</td>
+      </ng-container>
+    }
+  }
 
-  <!-- Weight Column -->
-  <ng-container matColumnDef="weight">
-    <th mat-header-cell *matHeaderCellDef>Weight</th>
-    <td mat-cell *matCellDef="let element">{{ element.weight }}</td>
-  </ng-container>
-
-  <!-- Symbol Column -->
-  <ng-container matColumnDef="symbol">
-    <th mat-header-cell *matHeaderCellDef>Symbol</th>
-    <td mat-cell *matCellDef="let element">{{ element.symbol }}</td>
-  </ng-container>
-
-  <!-- Secondary Column -->
+  <!-- Secondary row Columns -->
+  <!-- [attr.colspan]="displayedColumns.length" is to make the split line same as first row -->
   <ng-container matColumnDef="secondary">
     <td mat-cell [attr.colspan]="displayedColumns.length" *matCellDef="let element">
       Secondary row for the element {{ element.name }}
     </td>
   </ng-container>
 
+  <!-- if we've same no. of columns like first row, we can use this -->
+  <!-- 
+  @for (column of displayed2ndColumns; track $index) {
+    <ng-container [matColumnDef]="column">
+      <td mat-cell *matCellDef="let element">{{ element[column] }}</td>
+    </ng-container>
+  } -->
+
+  <!-- row header -->
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <!-- first row -->
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  <!-- second row -->
   <tr mat-row *matRowDef="let row; columns: ['secondary']"></tr>
 </table>
+<br /><br />
+<div>
+  <button mat-raised-button (click)="logSelection()">Console Log Selected</button>
+</div>

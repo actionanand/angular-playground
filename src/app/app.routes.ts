@@ -24,8 +24,8 @@ export const routes: Routes = [
     title: 'Playground - Table with Split Row',
   },
   {
-    path: 'table/multi-row',
-    loadComponent: () => import('./pages/multirow-table/multirow-table.component').then(c => c.MultirowTableComponent),
+    path: 'table/reusable-table',
+    loadComponent: () => import('./pages/reusable-table/reusable-table.component').then(c => c.ReusableTableComponent),
     title: 'Playground - Table with Multi Row',
   },
   {

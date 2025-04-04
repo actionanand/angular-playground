@@ -7,10 +7,10 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { MatCheckbox } from '@angular/material/checkbox';
 
 import { ELEMENT_DATA } from '../../shared/data/table.data';
-import { PeriodicElement } from '../../models/periodic-element.model';
+import { PeriodicElement } from '../../models';
 
 enum COLUMN_NAMES {
-  position = 'No.',
+  position = '#',
   name = 'Name',
   weight = 'Weight',
   symbol = 'Symbol',
@@ -63,5 +63,15 @@ export class TablePaginationComponent {
 
   logSelection() {
     this.selection.selected.forEach(s => console.log(s.name));
+  }
+
+  // To add row position, if not came from the API data
+  rowPosition(index: number): number {
+    /*
+    <td mat-cell *matCellDef="let element; let i = index;">{{ rowPosition(i) }}</td>
+    - Using *matCellDef="let element = index" if the table has one-row template
+    - Using *matCellDef="let element = dataIndex" if the table has multiple row templates
+    */
+    return (this.paginator()?.pageIndex ?? 0) * (this.paginator()?.pageSize ?? 0) + index + 1;
   }
 }

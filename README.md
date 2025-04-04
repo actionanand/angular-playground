@@ -2,6 +2,8 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 19.0.2.
 
+This project primarily focuses on working with Angular Material tables and their customizations.
+
 ## Cloning Guide
 
 1.  Clone only the remote primary HEAD (default: origin/master)

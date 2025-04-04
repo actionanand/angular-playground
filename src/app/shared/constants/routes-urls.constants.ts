@@ -16,7 +16,7 @@ export const ROUTES_URL = [
     name: 'Table with Split Row',
   },
   {
-    url: ['table', 'multi-row'],
-    name: 'Table with Multi Row',
+    url: ['table', 'reusable-table'],
+    name: 'Generic Table',
   },
 ];

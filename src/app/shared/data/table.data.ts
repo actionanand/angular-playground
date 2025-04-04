@@ -1,4 +1,4 @@
-import { PeriodicElement } from '../../models/periodic-element.model';
+import { PeriodicElement } from '../../models';
 
 export const ELEMENT_DATA: PeriodicElement[] = [
   { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
