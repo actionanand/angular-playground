@@ -15,14 +15,14 @@ import { createNewUserData } from '../../shared/data/user.data';
   styleUrl: './reusable-table.component.scss',
 })
 export class ReusableTableComponent {
-  introText = 'Button actions and payloads come here in textual form';
-  columns: TableColumn[]; // this will define what you pass over to the table
+  columns: TableColumn[];
   columns2: TableColumn[];
-  buttons: TableBtn[]; // this will define what you pass over to the table
-  data: UserData[]; // this is example data but you can use any object to pass to the table
+  buttons: TableBtn[];
+  data: UserData[];
   totalVolume: number = 0; // this is an example field used to show how you can access filtered data from the table
   totalRides: number = 0;
-  footer: string = ''; // in this example I'm using a dynamic footer which changes with the filtered data
+  footer: string = '';
+  disableSortingFor = ['date', 'rides'];
 
   inputColumns = ['date', 'name', 'volume', 'rides', 'material'];
 
@@ -89,7 +89,7 @@ export class ReusableTableComponent {
   };
 
   // Use the filtered data from the table and modify the footer accordingly
-  applyFilter(filteredData: UserData[]) {
+  applyFiltertoTable(filteredData: UserData[]) {
     this.totalVolume = 0;
     this.totalRides = 0;
     filteredData.forEach(user => {

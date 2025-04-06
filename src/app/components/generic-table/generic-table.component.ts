@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
@@ -20,6 +20,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { TableColumn } from '../../models';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-generic-table',
@@ -30,9 +31,11 @@ import { TableColumn } from '../../models';
     MatIconModule,
     MatInputModule,
     MatTableModule,
+    MatSortModule,
     MatPaginatorModule,
     MatFormFieldModule,
     NgTemplateOutlet,
+    FormsModule,
   ],
   templateUrl: './generic-table.component.html',
   styleUrl: './generic-table.component.scss',
@@ -40,7 +43,6 @@ import { TableColumn } from '../../models';
 export class GenericTableComponent implements OnChanges {
   @Input() tableColumnTemplate!: TemplateRef<any>;
   @Input() columns: TableColumn[] = [];
-
   @Input() data: any[] = [];
   @Input() filter: boolean = false;
   @Input() filterPlaceholder: string = 'Filter';
@@ -48,6 +50,7 @@ export class GenericTableComponent implements OnChanges {
   @Input() pagination: number[] = [];
   @Input() pageSize!: number;
   @Input() tableMinWidth: number = 500;
+  @Input() nonSortableColumns: string[] = [];
 
   @Output() filteredData = new EventEmitter<any[]>();
 
@@ -59,6 +62,18 @@ export class GenericTableComponent implements OnChanges {
 
   @ViewChild(MatSort, { static: true })
   sort!: MatSort;
+
+  input: string = '';
+
+  // Map to store disabled states
+  columnDisabledMap: { [key: string]: boolean } = {};
+
+  isSortingDisabled(column: string): boolean {
+    if (this.nonSortableColumns) {
+      return this.nonSortableColumns.includes(column);
+    }
+    return false;
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.data) {
@@ -72,6 +87,11 @@ export class GenericTableComponent implements OnChanges {
         console.log('Datasource : ', this.dataSource);
         console.log('column : ', this.columns);
       }
+    }
+
+    if (changes['columns'] || changes['nonSortableColumns']) {
+      this.computeDisabledStates();
+      console.log('Columns or nonSortableColumns changed');
     }
   }
 
@@ -87,5 +107,20 @@ export class GenericTableComponent implements OnChanges {
     }
 
     this.dataSource.sort = this.sort;
+  }
+
+  private computeDisabledStates(): void {
+    this.columnDisabledMap = {};
+    this.columns.forEach(column => {
+      this.columnDisabledMap[column.columnDef] = this.nonSortableColumns.includes(column.columnDef);
+    });
+
+    /*
+    // Alternatively, using reduce to create the map
+    this.columnDisabledMap = this.columns.reduce((map, column) => {
+      map[column.columnDef] = this.nonSortableColumns.includes(column.columnDef);
+      return map;
+    }, {} as { [key: string]: boolean });
+    */
   }
 }
