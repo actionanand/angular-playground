@@ -8,10 +8,10 @@ mat-paginator {
   width: 100%;
 }
 
-td,
-th {
-  width: 25%;
-}
+// td,
+// th {
+//   width: 25%;
+// }
 
 mat-icon {
   font-size: 18px;
@@ -19,4 +19,48 @@ mat-icon {
 
 .table-buttons__field {
   min-width: 200px;
+}
+
+.table-filter-width {
+  width: 100%;
+}
+
+.generic-checkbox {
+  &-number {
+    padding-left: 16px;
+  }
+
+  &-no {
+    .generic-checkbox-checkbox {
+      display: none;
+    }
+
+    .generic-checkbox-number {
+      display: block;
+    }
+  }
+
+  &-check {
+    .generic-checkbox-checkbox {
+      display: block;
+    }
+
+    .generic-checkbox-number {
+      display: none;
+    }
+  }
+
+  &:hover {
+    .generic-checkbox-checkbox {
+      display: block;
+    }
+
+    .generic-checkbox-number {
+      display: none;
+    }
+  }
+}
+
+.table-footer {
+  display: flex;
 }
