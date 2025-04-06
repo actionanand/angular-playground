@@ -8,10 +8,10 @@ mat-paginator {
   width: 100%;
 }
 
-td,
-th {
-  width: 25%;
-}
+// td,
+// th {
+//   width: 25%;
+// }
 
 mat-icon {
   font-size: 18px;
@@ -19,4 +19,8 @@ mat-icon {
 
 .table-buttons__field {
   min-width: 200px;
+}
+
+.table-filter-width {
+  width: 100%;
 }

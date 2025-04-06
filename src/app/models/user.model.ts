@@ -3,6 +3,7 @@ export interface UserData {
   name: string;
   date: Date;
   rides: number;
-  volume?: string;
   material: string;
+  volume?: string;
+  [key: string]: unknown; // Allows dynamic keys
 }

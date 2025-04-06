@@ -1,6 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { NgFor, NgIf, NgStyle } from '@angular/common';
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { NgFor, NgIf, NgStyle, NgTemplateOutlet } from '@angular/common';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core';
 
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -10,7 +19,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
-import { TableColumn, TableBtn } from '../../models';
+import { TableColumn } from '../../models';
 
 @Component({
   selector: 'app-generic-table',
@@ -23,13 +32,15 @@ import { TableColumn, TableBtn } from '../../models';
     MatTableModule,
     MatPaginatorModule,
     MatFormFieldModule,
+    NgTemplateOutlet,
   ],
   templateUrl: './generic-table.component.html',
   styleUrl: './generic-table.component.scss',
 })
 export class GenericTableComponent implements OnChanges {
+  @Input() tableColumnTemplate!: TemplateRef<any>;
   @Input() columns: TableColumn[] = [];
-  @Input() buttons: TableBtn[] = [];
+
   @Input() data: any[] = [];
   @Input() filter: boolean = false;
   @Input() filterPlaceholder: string = 'Filter';
@@ -39,7 +50,6 @@ export class GenericTableComponent implements OnChanges {
   @Input() tableMinWidth: number = 500;
 
   @Output() filteredData = new EventEmitter<any[]>();
-  @Output() buttonClick = new EventEmitter<string[]>();
 
   dataSource!: MatTableDataSource<any>;
   displayedColumns!: string[];
@@ -57,7 +67,10 @@ export class GenericTableComponent implements OnChanges {
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
         this.displayedColumns = [...this.columns.map(c => c.columnDef)];
-        if (this.buttons.length > 0) this.displayedColumns = [...this.displayedColumns, 'actions'];
+
+        console.log('data : ', this.data);
+        console.log('Datasource : ', this.dataSource);
+        console.log('column : ', this.columns);
       }
     }
   }

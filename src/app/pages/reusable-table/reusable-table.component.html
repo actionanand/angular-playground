@@ -1,15 +1,14 @@
 <app-generic-table
   [columns]="columns"
-  [buttons]="buttons"
   [data]="data"
   [filter]="true"
   [filterPlaceholder]="'Filter any value'"
   [footer]="footer"
   [pagination]="[5, 25, 100]"
   [pageSize]="5"
+  [tableColumnTemplate]="reusableTableTemp"
   [tableMinWidth]="400"
-  (filteredData)="applyFilter($event)"
-  (buttonClick)="buttonClick($event)">
+  (filteredData)="applyFilter($event)">
   <!-- columns: required,
                      data: required
                      filter: not required, if null => no filter
@@ -23,4 +22,22 @@
                   -->
 </app-generic-table>
 
-<app-generic-table [columns]="columns" [data]="data"> </app-generic-table>
+<app-generic-table [columns]="columns2" [data]="data"> </app-generic-table>
+
+<ng-template #reusableTableTemp let-element="element" let-i="index" let-column="column">
+  <ng-container *ngIf="column.columnDef === 'actions'">
+    <div class="btn-group">
+      @for (button of buttons; track $index) {
+        <button mat-raised-button [ngClass]="button.styleClass">
+          <mat-icon> {{ button.icon }} </mat-icon>
+          {{ button.text }}
+        </button>
+      }
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="column.columnDef !== 'actions'">
+    <span> {{ column.cell(element) }} </span>
+    <!-- <span> {{ element[column.columnDef] }} </span> -->
+  </ng-container>
+</ng-template>

@@ -1,17 +1,28 @@
-<mat-form-field *ngIf="filter">
-  <input matInput (keyup)="applyFilter($event)" [placeholder]="filterPlaceholder || 'Enter text to filter'" />
+<mat-form-field *ngIf="filter" class="table-filter-width">
+  <mat-label> {{ filterPlaceholder }} </mat-label>
+  <input matInput (keyup)="applyFilter($event)" />
 </mat-form-field>
 
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource" matSort [ngStyle]="{ 'min-width': +tableMinWidth + 'px' }">
-    <ng-container *ngFor="let column of columns">
+    <ng-container *ngFor="let column of columns; index as i">
       <ng-container matColumnDef="{{ column.columnDef }}">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ column.header }}</th>
-        <td mat-cell *matCellDef="let row">{{ column.cell(row) }}</td>
+        <!-- <td mat-cell *matCellDef="let row">{{ column.cell(row) }}</td> -->
+        <td mat-cell *matCellDef="let row">
+          <!-- <span> {{ column.cell(row) }} </span> -->
+          <ng-container
+            [ngTemplateOutlet]="tableColumnTemplate || deafaultTemp"
+            [ngTemplateOutletContext]="{
+              element: row,
+              column: column,
+              index: i,
+            }"></ng-container>
+        </td>
       </ng-container>
     </ng-container>
 
-    <ng-container *ngIf="buttons.length > 0">
+    <!-- <ng-container *ngIf="buttons.length > 0">
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let row" [ngStyle]="{ 'min-width': 'calc(55px * ' + buttons.length + ')' }">
@@ -24,7 +35,12 @@
           </div>
         </td>
       </ng-container>
-    </ng-container>
+    </ng-container> -->
+
+    <ng-template #deafaultTemp let-element="element" let-column="column">
+      <span> {{ column.cell(element) }} </span>
+      <!-- <span> {{ element[column.columnDef] }} </span> -->
+    </ng-template>
 
     <!-- Disclaimer column - with nullable approach -->
     <ng-container matColumnDef="disclaimer" *ngIf="footer">
