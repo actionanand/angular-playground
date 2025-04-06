@@ -31,12 +31,13 @@ export class ReusableTableComponent {
     this.data = Array.from({ length: 100 }, (_, k) => createNewUserData(k + 1));
 
     this.columns2 = this.generateColumns(this.inputColumns);
-    this.columns = this.generateColumns(this.inputColumns);
+    this.columns = this.generateColumns(['checkbox', ...this.inputColumns]);
 
-    this.columns.push({
-      columnDef: 'actions',
-      header: 'Actions',
-    });
+    //  generate special columns without cell function
+    const extraColumns = this.generateSpecialColumns(['actions']);
+
+    // Add the generated extra columns to the existing columns
+    this.columns.push(...extraColumns);
 
     this.buttons = [
       {
@@ -80,6 +81,8 @@ export class ReusableTableComponent {
               return `${element.date.toLocaleDateString()}`;
             case 'volume':
               return `${element.volume} m³`;
+            case 'checkbox':
+              return `${element.id}`; // Placeholder for checkbox column
             default:
               return `${element[column]}`; // Default case for other fields
           }
@@ -87,6 +90,15 @@ export class ReusableTableComponent {
       };
     });
   };
+
+  private generateSpecialColumns(columns: string[]): TableColumn[] {
+    return columns.map(column => {
+      return {
+        columnDef: column,
+        header: column.charAt(0).toUpperCase() + column.slice(1),
+      };
+    });
+  }
 
   // Use the filtered data from the table and modify the footer accordingly
   applyFiltertoTable(filteredData: UserData[]) {

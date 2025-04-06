@@ -15,20 +15,49 @@
     [ngStyle]="{ 'min-width': +tableMinWidth + 'px' }"
     multiTemplateDataRows>
     <ng-container *ngFor="let column of columns; index as i">
-      <ng-container matColumnDef="{{ column.columnDef }}">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="columnDisabledMap[column.columnDef]">
-          {{ column.header }}
-        </th>
-        <td mat-cell *matCellDef="let row">
-          <ng-container
-            [ngTemplateOutlet]="tableColumnTemplate || deafaultTemp"
-            [ngTemplateOutletContext]="{
-              element: row,
-              column: column,
-              index: i,
-            }"></ng-container>
-        </td>
-      </ng-container>
+      @if (column.columnDef === 'checkbox') {
+        <ng-container [matColumnDef]="column.columnDef">
+          <!-- position header is always checkbox -->
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-checkbox
+              (change)="$event && !selection.selected.length ? masterToggle() : selection.clear() && null"
+              [checked]="selection.hasValue() || isAllSelected()"
+              [indeterminate]="selection.hasValue() && !isAllSelected()">
+            </mat-checkbox>
+          </th>
+
+          <!-- position column is checkbox if 'split-table-check' is set -->
+          <td mat-cell *matCellDef="let row">
+            <div
+              class="generic-checkbox"
+              [ngClass]="selection.isSelected(row) ? 'generic-checkbox-check' : 'generic-checkbox-no'">
+              <mat-checkbox
+                class="generic-checkbox-checkbox"
+                (click)="$event.stopPropagation()"
+                (change)="$event ? selection.toggle(row) : null"
+                [checked]="selection.isSelected(row)">
+              </mat-checkbox>
+
+              <span class="generic-checkbox-number"> {{ column.cell?.(row) }} </span>
+            </div>
+          </td>
+        </ng-container>
+      } @else {
+        <ng-container matColumnDef="{{ column.columnDef }}">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="columnDisabledMap[column.columnDef]">
+            {{ column.header }}
+          </th>
+          <td mat-cell *matCellDef="let row">
+            <ng-container
+              [ngTemplateOutlet]="tableColumnTemplate || deafaultTemp"
+              [ngTemplateOutletContext]="{
+                element: row,
+                column: column,
+                index: i,
+              }"></ng-container>
+          </td>
+        </ng-container>
+      }
     </ng-container>
 
     <ng-template #deafaultTemp let-element="element" let-column="column">
@@ -57,8 +86,19 @@
     </ng-container>
   </table>
 
-  <mat-paginator
-    [pageSizeOptions]="pagination"
-    [pageSize]="pageSize"
-    [ngStyle]="{ 'min-width': +tableMinWidth + 'px' }"></mat-paginator>
+  <div class="table-footer">
+    <button mat-fab extended (click)="logSelection()" *ngIf="selection.selected.length > 0">
+      <mat-icon>print</mat-icon>
+      Log selection
+    </button>
+
+    <mat-paginator
+      [pageSizeOptions]="pagination"
+      [pageSize]="pageSize"
+      [ngStyle]="{ 'min-width': +tableMinWidth + 'px' }"></mat-paginator>
+  </div>
 </div>
+
+<br />
+
+<!-- <button (click)="logSelection()" *ngIf="selection.selected.length > 0"> log selection </button> -->

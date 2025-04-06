@@ -24,3 +24,43 @@ mat-icon {
 .table-filter-width {
   width: 100%;
 }
+
+.generic-checkbox {
+  &-number {
+    padding-left: 16px;
+  }
+
+  &-no {
+    .generic-checkbox-checkbox {
+      display: none;
+    }
+
+    .generic-checkbox-number {
+      display: block;
+    }
+  }
+
+  &-check {
+    .generic-checkbox-checkbox {
+      display: block;
+    }
+
+    .generic-checkbox-number {
+      display: none;
+    }
+  }
+
+  &:hover {
+    .generic-checkbox-checkbox {
+      display: block;
+    }
+
+    .generic-checkbox-number {
+      display: none;
+    }
+  }
+}
+
+.table-footer {
+  display: flex;
+}

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { NgFor, NgIf, NgStyle, NgTemplateOutlet } from '@angular/common';
+import { NgClass, NgFor, NgIf, NgStyle, NgTemplateOutlet } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -18,9 +18,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
+import { SelectionModel } from '@angular/cdk/collections';
+import { MatCheckbox } from '@angular/material/checkbox';
 
 import { TableColumn } from '../../models';
-import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-generic-table',
@@ -36,6 +39,9 @@ import { FormsModule } from '@angular/forms';
     MatFormFieldModule,
     NgTemplateOutlet,
     FormsModule,
+    MatCheckbox,
+    NgClass,
+    MatButtonModule,
   ],
   templateUrl: './generic-table.component.html',
   styleUrl: './generic-table.component.scss',
@@ -48,13 +54,14 @@ export class GenericTableComponent implements OnChanges {
   @Input() filterPlaceholder: string = 'Filter';
   @Input() footer: string = '';
   @Input() pagination: number[] = [];
-  @Input() pageSize!: number;
+  @Input() pageSize: number = 25;
   @Input() tableMinWidth: number = 500;
   @Input() nonSortableColumns: string[] = [];
 
   @Output() filteredData = new EventEmitter<any[]>();
 
   dataSource!: MatTableDataSource<any>;
+  selection!: SelectionModel<any>;
   displayedColumns!: string[];
 
   @ViewChild(MatPaginator, { static: true })
@@ -82,6 +89,7 @@ export class GenericTableComponent implements OnChanges {
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
         this.displayedColumns = [...this.columns.map(c => c.columnDef)];
+        this.selection = new SelectionModel<any>(true, []);
 
         console.log('data : ', this.data);
         console.log('Datasource : ', this.dataSource);
@@ -91,7 +99,6 @@ export class GenericTableComponent implements OnChanges {
 
     if (changes['columns'] || changes['nonSortableColumns']) {
       this.computeDisabledStates();
-      console.log('Columns or nonSortableColumns changed');
     }
   }
 
@@ -107,6 +114,21 @@ export class GenericTableComponent implements OnChanges {
     }
 
     this.dataSource.sort = this.sort;
+  }
+
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
+    this.isAllSelected() ? this.selection.clear() : this.dataSource.data.forEach(row => this.selection.select(row));
+  }
+
+  logSelection() {
+    this.selection.selected.forEach(s => console.log(s));
   }
 
   private computeDisabledStates(): void {
