@@ -229,6 +229,8 @@ To configure the pre-commit hook, simply add a `precommit` npm script. We want t
 
 ## Wiki
 
+- [Reusable Generic table - stackblitz](https://stackblitz.com/edit/angular-generic-mat-table)
+- [Reusable table - stackblitz](https://stackblitz.com/edit/angular-dev-reusable-generic-table)
 - [GitHub Actions for Angular](https://github.com/rodrigokamada/angular-github-actions)
 - [Angular 16 - milestone release](https://github.com/actionanand/ng16-signal-milestone-release)
 - [Meet Angular v19 - Official](https://blog.angular.dev/meet-angular-v19-7b29dfd05b84)

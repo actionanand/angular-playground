@@ -129,6 +129,7 @@ export class GenericTableComponent implements OnChanges {
 
   logSelection() {
     this.selection.selected.forEach(s => console.log(s));
+    this.selection.clear();
   }
 
   private computeDisabledStates(): void {
