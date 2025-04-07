@@ -70,6 +70,10 @@ export class ReusableTableComponent {
     this.footer = `Total volume: ${this.totalVolume}m³ / trips: ${this.totalRides}`;
   }
 
+  onClickActionBtn(action: string, payload: UserData) {
+    console.log(`Payload for - '${action}'`, payload);
+  }
+
   private generateColumns = (inputColumns: string[]): TableColumn[] => {
     return inputColumns.map(column => {
       return {

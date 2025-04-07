@@ -30,7 +30,7 @@
   <ng-container *ngIf="column.columnDef === 'actions'">
     <div class="btn-group">
       @for (button of buttons; track $index) {
-        <button mat-raised-button [ngClass]="button.styleClass">
+        <button mat-raised-button [ngClass]="button.styleClass" (click)="onClickActionBtn(button.action, element)">
           <mat-icon> {{ button.icon }} </mat-icon>
           {{ button.text }}
         </button>
